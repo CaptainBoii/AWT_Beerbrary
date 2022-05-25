@@ -141,7 +141,7 @@ def change_theme(request):
     user_id = request_data['user_id']
     new_theme = request_data['theme']
     user = User.objects.get(id=user_id)
-    user.theme_id = PrefferedThemes.objects.get(id=new_theme)
+    user.theme = PrefferedThemes.objects.get(id=new_theme)
     user.save()
     return JsonResponse({"status": "ok"})
 
@@ -155,18 +155,18 @@ def get_beer(request):
     response_data.__setitem__("line", beer.line)
     response_data.__setitem__("flavour", beer.flavour)
     response_data.__setitem__("price", beer.price)
-    response_data.__setitem__("brewery", beer.brewery_id.name)
-    response_data.__setitem__("brewery_id", beer.brewery_id.id)
+    response_data.__setitem__("brewery", beer.brewery.name)
+    response_data.__setitem__("brewery_id", beer.brewery.id)
     response_data.__setitem__("voltage", beer.voltage)
-    response_data.__setitem__("type_id", beer.type_id.id)
-    response_data.__setitem__("type", beer.type_id.name)
+    response_data.__setitem__("type_id", beer.beertype.id)
+    response_data.__setitem__("type", beer.beertype.name)
     return HttpResponse(json.dumps(response_data))
 
 def get_beers(request):
     response_data = {}
     for beer in Beer.objects.raw('SELECT * FROM files_beer'):
         response_data.__setitem__(beer.id, {"name": beer.name, "line": beer.line, "flavour": beer.flavour, "price": beer.price,
-            "voltage": beer.voltage, "brewery": beer.brewery_id.name, "brewery_id": beer.brewery_id.id, "type_id": beer.type_id.id, "type": beer.type_id.name})
+            "voltage": beer.voltage, "brewery": beer.brewery.name, "brewery_id": beer.brewery.id, "type_id": beer.beertype.id, "type": beer.beertype.name})
     return HttpResponse(json.dumps(response_data))
 
 def register_user(request):

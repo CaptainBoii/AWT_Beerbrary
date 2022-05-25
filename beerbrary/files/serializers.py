@@ -28,14 +28,14 @@ class UserSerializer(serializers.ModelSerializer):
             "name",
             "password_hash",
             "login",
-            "theme_id",
+            "theme",
             "spotify_account"
         )
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = ("id", "genre_id", "name")
+        fields = ("id", "genre", "name")
 
 
 
@@ -60,14 +60,14 @@ class BrewerySerializer(serializers.ModelSerializer):
 class BeerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Beer
-        fields = ("id", "name", "line", "flavour", "price", "voltage", "brewery_id",
-        "type_id")
+        fields = ("id", "name", "line", "flavour", "price", "voltage", "brewery",
+        "type")
 
 
 class BeerAttributeSerializer(serializers.ModelSerializer):
     class Meta:
         model = BeerAttribute
-        fields = ("id", "attribute_id", "beer_id")
+        fields = ("id", "attribute", "beer")
 
 
 
