@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-import files.views
+from files.views import get_beer, get_beers
 from rest_framework import routers, serializers, viewsets
 
 urlpatterns = [

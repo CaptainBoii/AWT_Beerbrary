@@ -1,7 +1,7 @@
 #serializers.py - this file assigns an object-type model to each class from models.py, 
 #defining fields contained within an object
 
-from conference.models import (
+from files.models import (
     User,
     PrefferedThemes,
     Genre,
@@ -35,13 +35,13 @@ class UserSerializer(serializers.ModelSerializer):
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = ("id", , "genre_id", "name")
+        fields = ("id", "genre_id", "name")
 
 
 
 class AttributesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Organization
+        model = Attributes
         fields = ("id", "name")
 
 
@@ -60,7 +60,7 @@ class BrewerySerializer(serializers.ModelSerializer):
 class BeerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Beer
-        fields = ("id", "name", "line", "flavour", "price", "brewery_id",
+        fields = ("id", "name", "line", "flavour", "price", "voltage", "brewery_id",
         "type_id")
 
 

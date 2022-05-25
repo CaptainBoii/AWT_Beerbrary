@@ -163,6 +163,7 @@ def get_beer(request):
     response_data.__setitem__("price", beer.price)
     response_data.__setitem__("brewery", brewery.name)
     response_data.__setitem__("brewery_id", brewery.id)
+    response_data.__setitem__("voltage", beer.voltage)
     response_data.__setitem__("type_id", beer_type.id)
     response_data.__setitem__("type", beer_type.name)
     return HttpResponse(json.dumps(response_data))
@@ -173,7 +174,7 @@ def get_beers(request):
         beer_type = BeerType.objects.raw("SELECT * FROM files_beertype WHERE id = {0}".format(beer.type_id))[0].name
         brewery = BeerType.objects.raw("SELECT * FROM files_beertype WHERE id = {0}".format(beer.brewery_id))[0].name
         response_data.__setitem__(beer.id, {"name": beer.name, "line": beer.line, "flavour": beer.flavour, "price": beer.price,
-            "brewery": brewery.name, "brewery_id": brewery.id, "type_id": beer_type.id, "type": beer_type.name})
+            "voltage": beer.voltage, "brewery": brewery.name, "brewery_id": brewery.id, "type_id": beer_type.id, "type": beer_type.name})
     return HttpResponse(json.dumps(response_data))
 
 def register_user(request):
@@ -190,7 +191,7 @@ def register_user(request):
             name_duplicate = True
         if user.password == password:
             password_duplicate = True
-        if user.login = login:
+        if user.login == login:
             login_duplicate = True
     if not password_duplicate and not login_duplicate and not name_duplicate:
         user = User()
@@ -200,9 +201,9 @@ def register_user(request):
         user.theme_id = 1
         return JsonResponse({"status": "ok"})
     else:
-        response_data.__setitem__("login": login_duplicate)
-        response_data.__setitem__("username": name_duplicate)
-        response_data.__setitem__("password": password_duplicate)
+        response_data.__setitem__("login", login_duplicate)
+        response_data.__setitem__("username", name_duplicate)
+        response_data.__setitem__("password", password_duplicate)
         return HttpResponse(json.dumps(response_data))
     
 

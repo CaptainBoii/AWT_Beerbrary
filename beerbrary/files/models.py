@@ -29,6 +29,7 @@ class Beer(models.Model):
     line =  models.CharField(max_length=100)
     flavour = models.CharField(max_length=100)
     price = models.FloatField()
+    voltage = models.FloatField()
     brewery_id = models.ForeignKey(Brewery, on_delete=models.CASCADE)
     type_id = models.ForeignKey(BeerType, on_delete=models.CASCADE)
 
